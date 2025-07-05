@@ -31,7 +31,10 @@ class Checkout:
                 for _ in range(quantity):
                     self.shippable_items.append(product)
 
-        self.shipping_fee = 30 if self.shippable_items else 0
+        if self.shippable_items:
+            self.shipping_fee = ShippingService.ship(self.shippable_items)
+        else:
+            self.shipping_fee = 0
         self.total = self.subtotal + self.shipping_fee
 
         if self.customer.balance < self.total:
@@ -50,7 +53,7 @@ class Checkout:
             total_price = item.product.price * item.quantity
             print(f"{item.quantity}x {item.product.name}".ljust(20) + f"{total_price}")
         print("-" * 22)
-        print(f"Subtotal".ljust(20) + f"{self.subtotal}")
-        print(f"Shipping".ljust(20) + f"{self.shipping_fee}")
-        print(f"Amount".ljust(20) + f"{self.total}")
-        print(f"Remaining Balance: {self.customer.balance}")
+        print(f"Subtotal\t\t" + f"{self.subtotal}")
+        print(f"Shipping\t\t" + f"{self.shipping_fee}")
+        print(f"Amount\t\t\t" + f"{self.total}")
+        print(f"Remaining Balance:\t{self.customer.balance}")
