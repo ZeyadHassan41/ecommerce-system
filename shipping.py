@@ -1,5 +1,5 @@
 import math
-
+SHIPPINF_FEES = 30
 class ShippingService:
     @staticmethod
     def ship(items):
@@ -22,5 +22,5 @@ class ShippingService:
         rounded_kg = math.ceil(total_weight_kg)
         print(f"Total package weight {total_weight_kg:.1f}kg")
 
-        shipping_fee = 30 * rounded_kg
+        shipping_fee = SHIPPINF_FEES * rounded_kg
         return shipping_fee
